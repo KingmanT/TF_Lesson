@@ -11,9 +11,9 @@ resource "aws_instance" "web_server01" {
   ami = "ami-08c40ec9ead489470"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web_ssh.id]
-  key_name = "ubuntuSandbox"
+  #key_name = "ubuntuSandbox"
 
-  user_data = "${file("deploy.sh")}"
+  #user_data = "${file("deploy.sh")}"
 
   tags = {
     "Name" : "tf_made_instance"
