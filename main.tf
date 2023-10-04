@@ -24,7 +24,7 @@ resource "aws_instance" "web_server01" {
 # create security groups
 
 resource "aws_security_group" "web_ssh" {
-  name        = "ssh-access"
+  name        = "tf_made_sg"
   description = "open ssh traffic"
 
 
