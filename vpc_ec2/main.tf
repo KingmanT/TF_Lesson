@@ -34,6 +34,7 @@ resource "aws_subnet" "my_subnet" {
 resource "aws_security_group" "web_ssh" {
   name        = "tf_made_sg"
   description = "open ssh traffic"
+  vpc_id = aws_vpc.vpc.id
 
 
   ingress {
@@ -71,7 +72,7 @@ resource "aws_instance" "web_server01" {
   ami = "ami-08c40ec9ead489470"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.my_subnet.id
-  vpc_security_group_ids = [aws_security_group.web_ssh.id]
+  security_groups = [aws_security_group.web_ssh.id]
   #key_name = "ubuntuSandbox"
 
   #user_data = "${file("deploy.sh")}"
