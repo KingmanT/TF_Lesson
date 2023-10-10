@@ -1,7 +1,10 @@
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
+variable "instance_type" {}
+variable "instance_name" {}
 variable "subnet_id" {}
 variable "vpc_id" {}
+variable "security_group_name" {}
 
 # configure aws provider
 provider "aws" {
@@ -14,7 +17,7 @@ provider "aws" {
 # create instance
 resource "aws_instance" "web_server01" {
   ami = "ami-08c40ec9ead489470"
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
   subnet_id = var.subnet_id
   security_groups = [aws_security_group.web_ssh.id]
   #key_name = ""
@@ -22,7 +25,7 @@ resource "aws_instance" "web_server01" {
   #user_data = "${file("deploy.sh")}"
 
   tags = {
-    "Name" : "tf_made_instance"
+    "Name" : var.instance_name
   }
 
 }
@@ -30,7 +33,7 @@ resource "aws_instance" "web_server01" {
 # create security groups
 
 resource "aws_security_group" "web_ssh" {
-  name        = "tf_made_sg"
+  name        = var.security_group_name
   description = "open ssh traffic"
   vpc_id = var.vpc_id
 
