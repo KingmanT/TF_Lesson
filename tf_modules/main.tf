@@ -9,7 +9,7 @@ provider "aws" {
 
 # create vpc
 module "vpc" {
-  source       = "../Terraform_Modules/vpc"
+  source       = "../vpc"
   region       = var.region
   project_name = var.project_name
   vpc_cidr     = var.vpc_cidr
@@ -18,7 +18,7 @@ module "vpc" {
 
 #create instance
 module "instance" {
-  source              = "../D4_Terraform_Modules/instance"
+  source              = "../instance"
   ami                 = var.ami
   instance_type       = var.instance_type
   instance_name       = var.instance_name
