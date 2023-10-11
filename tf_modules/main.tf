@@ -27,3 +27,8 @@ module "instance" {
   subnet_id           = module.vpc.subnet_id
   vpc_id              = module.vpc.vpc_id
 }
+
+
+output "instance_ip" {
+  value = aws_instance.web_server01.public_ip
+}
