@@ -4,18 +4,18 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames    = true
 
   tags      = {
-    Name    = "tf-made-vpc"
+    Name    = "${var.project_name}-vpc"
   }
 }
 
 # Create a subnet within the VPC
 resource "aws_subnet" "my_subnet" {
-  vpc_id                  = aws_vpc.my_vpc.id #will cause error
+  vpc_id                  = aws_vpc.vpc.id
   cidr_block              = "172.19.0.0/16"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
 
   tags      = {
-    Name    = "tf-made-subnet"
+    Name    = "${var.project_name}-subnet"
   }
 }
