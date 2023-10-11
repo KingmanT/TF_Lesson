@@ -1,9 +1,9 @@
 # Create Security Groups
 
 resource "aws_security_group" "web_ssh" {
-  name        = "tf_made_sg"
+  name        = "${var.project_name}_sg"
   description = "open ssh traffic"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = var.vpc_id
 
 
   ingress {
@@ -38,16 +38,16 @@ resource "aws_security_group" "web_ssh" {
 
 # Create instance
 resource "aws_instance" "web_server01" {
-  ami = "ami-08c40ec9ead489470"
-  instance_type = "t2.micro"
-  subnet_id = aws_subnet.my_subnet.id
+  ami = var.ami
+  instance_type = var.instance_type
+  subnet_id = var.subnet_id
   security_groups = [aws_security_group.web_ssh.id]
-  #key_name = "ubuntuSandbox"
+  key_name = var.key_name
 
   #user_data = "${file("deploy.sh")}"
 
   tags = {
-    "Name" : "tf_made_instance"
+    "Name" : "${var.project_name}_instance"
   }
 
 }
